@@ -1,0 +1,46 @@
+<form method="POST" action = "/users/signup" id="form">
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Name</label>
+    <input name="name" type="text" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text" style="color:aliceblue">We'll never share your email with anyone else.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input name="password" type="password" class="form-control" id="exampleInputPassword1"> 
+    <div id="emailHelp" class="form-text" style="color:aliceblue">We'll never share your password with anyone else.</div> 
+
+  <div class="form-group">
+    <label for="enterAge">Age</label>
+    <input name="age" type="number" class="form-control" id="enterAge"> 
+  <div> 
+
+  <div class="form-group">
+    <label for="enterEducation">Education</label>
+    <select name="education" type="text" class="form-control" id="enterEducation">
+       <option value="secondary"> 
+        Secondary
+      </option >
+      <option value="higher"> 
+        Higher
+      </option>
+      <option value="mba"> 
+        MBA
+      </option>
+    </select>
+    <input name="education" type="number" class="form-control" id="enterEducation"> 
+  <div> 
+
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{{#if error}}
+<p>{{error}}</p>
+{{/if}}
