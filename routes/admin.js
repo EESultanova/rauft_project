@@ -8,4 +8,6 @@ adminRouter.get('/', async (req, res) => {
   res.render('admin', {candidates})
 })
 
+adminRouter.patch()
+
 module.exports = adminRouter
