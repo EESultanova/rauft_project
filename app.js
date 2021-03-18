@@ -12,7 +12,7 @@ const adminRouter = require('./routes/admin')
 
 const dbConnect = require('./config/dbConnect')
 const { dbConnectionURL } = require('./config/dbConfig')
-//const User = require('./db/models/User')
+const User = require('./db/models/User')
 
 const pagesRouter = require('./routes/pages');
 
@@ -25,7 +25,7 @@ app.set('trust proxy', 1)
 app.set('view engine', 'hbs')
 app.set('cookieName', 'sid')
 app.set('views', path.join(process.env.PWD, 'views'))
-hbs.registerPartials(path.join(process.env.PWD, 'views', 'partials'));
+hbs.registerPartials(path.join(process.env.PWD,'views', 'partials'))
 
 
 app.use(sessions({
@@ -51,6 +51,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', pagesRouter);
 
 //Mid for routes here
+app.use('/admin', adminRouter)
 
 app.listen(PORT, () => {
   console.log('Server started on port ', PORT)
