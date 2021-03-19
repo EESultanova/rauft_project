@@ -40,22 +40,17 @@ router.post("/signin", checkAuth, async (req, res) => {
   try {
     
     const { email, password } = req.body;
-    if (email && password) {
+    
       const searchByEmail = await User.findOne({ email });
       if (
-        searchByEmail &&
-        (await bcrypt.compare(password, searchByEmail.password)) &&
-        (searchByEmail.role == 0 || searchByEmail.role == 1)
+        searchByEmail.role == 0 || searchByEmail.role == 1
       ) {
-        console.log('searchByEmail--->', searchByEmail)
         req.session.roleSession = searchByEmail.role;
         req.session.emailSession = searchByEmail.email;
         req.session.idSession = searchByEmail._id;
-        res.locals.email = req.session.emailSession
-        console.log('POST sign in---->',req.session);
         return res.redirect("/club");
       }
-    } else {
+     else {
       return res.render("signin", { error: "Sorry, you are not approved yet" });
     }
   } catch (error) {
@@ -64,7 +59,7 @@ router.post("/signin", checkAuth, async (req, res) => {
 });
 
 
-router.get('/logout', checkAuth, async (req, res) => {
+router.get('/logout', async (req, res) => {
   req.session.destroy();
   res.redirect('/')
 })

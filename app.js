@@ -55,11 +55,13 @@ app.use(async (req, res, next) => {
   if (userId) {
     const currentUser = await User.findById(userId)
     console.log('currentUser',currentUser);
+    res.locals.id = req.session.idSession
     if (currentUser.role === 0) {
       console.log('currentUser.email',currentUser.email);
       res.locals.email = currentUser.email
       return next()
     }
+
   }
   next()
 })
