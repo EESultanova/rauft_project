@@ -1,12 +1,12 @@
 const User = require("../db/models/User");
 const checkIsAdmin = async (req, res, next) => {
-  const userId = req.session?.user?.id;
+  const userId = req.session.idSession
 
   if (userId) {
     const currentUser = await User.findById(userId);
-    req.userRole = currentUser.role;
+    req.roleSession = currentUser.role;
 
-    if (req.role === 0) {
+    if (req.roleSession  == 0) {
       return next();
     }
     return;

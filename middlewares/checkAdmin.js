@@ -17,8 +17,3 @@ const saltRound = 10
  }
 
 module.exports = checkAdmin
-
-
-
- 
-

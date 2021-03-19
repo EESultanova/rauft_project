@@ -27,7 +27,6 @@ app.set('cookieName', 'sid')
 app.set('views', path.join(process.env.PWD, 'views'))
 hbs.registerPartials(path.join(process.env.PWD, 'views', 'partials'))
 
-
 app.use(sessions({
   name: app.get('cookieName'),
   secret: secretKey,
@@ -37,16 +36,41 @@ app.use(sessions({
     mongoUrl: dbConnectionURL,
   }),
   cookie: {
-    secure: true,
+    //secure: true,
     httpOnly: true,
     maxAge: 86400 * 1e3,
   },
 }))
 
+
 app.use(morgan('dev'))
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+
+app.use(async (req, res, next) => {
+  console.log('MID------------>');
+  const userId = req.session.idSession
+  console.log('req.session.idSession',req.idSession);
+  if (userId) {
+    const currentUser = await User.findById(userId)
+    console.log('currentUser',currentUser);
+    if (currentUser.role === 0) {
+      console.log('currentUser.email',currentUser.email);
+      res.locals.email = currentUser.email
+      return next()
+    }
+  }
+  next()
+})
+
+app.use((req, res, next) => {
+  res.locals.userId = req.session.userId;
+  // if (req.session)
+  // res.locals.email = req.session.emailSession
+  // console.log('req.session--------->', req.session)
+  next();
+})
 
 app.use('/', pageRouter);
 app.use('/users/', userRouter);
@@ -55,18 +79,9 @@ app.use('/users/', userRouter);
 //Mid for routes here
 app.use('/admin', adminRouter)
 
-app.use(async (req, res, next) => {
-  const userId = req.session?.user?.id
-  if (userId) {
-    const currentUser = await User.findById(userId)
-    req.userRole = currentUser.role
-    if (req.userRole === 0) {
-      res.locals.email = currentUser.email
-      return next()
-    }
-  }
-  next()
-})
+
+
+
 
 app.listen(PORT, () => {
   console.log('Server started on port ', PORT)

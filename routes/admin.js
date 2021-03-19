@@ -13,6 +13,7 @@ adminRouter.get("/", checkIsAdmin, async (req, res) => {
           $dateToString: { format: "%d-%m-%Y", date: "$date_of_birth" },
         },
         name: 1,
+        age: 1,
         education: 1,
         industry: 1,
         hobby: 1,
