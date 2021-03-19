@@ -26,6 +26,26 @@ a {
   transition: 0.5s;
 }
 
+body {
+  /* background: linear-gradient(70deg, #363535, #f7f7f7); */
+  background-color: black;
+  /* color: #514B64; */
+  min-height: 100vh;
+}
+
+code {
+  background: #fff;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  margin: 0 0.3rem;
+}
+
+.nav_container {
+  /* display: flex; */
+  margin: auto;
+}
+
+
 a:hover, a:active, a:focus {
   color: #f8234a;
   outline: none;
@@ -42,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   margin: 0 0 20px 0;
   padding: 0;
-  color: #0e1b4d;
+  color: red;
 }
 
 .main-page {
@@ -152,13 +172,61 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
 }
 .left_container {
-  width: 800px;
+  width: 600px;
   font-size: 40px;
   color: red;
+  padding-right: 25px;
+}
+
+.left_container_custom {
+  width: 600px;
+  font-size: 40px;
+  color: red;
+  padding-right: 25px;
+}
+
+.right_container_custom {
+  font-size: 20px;
+  width: 600px;
 }
 
 .right_container {
   font-size: 20px;
+  width: 600px;
+}
+
+.right_container .about-btn {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 50px;
+  transition: 0.5s;
+  line-height: 1;
+  margin: 10px;
+  color: #fff;
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+  border: 2px solid #f82249;
+}
+
+.custom_header {
+  font-family: "Raleway", sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px
+}
+
+.custom_text {
+  font-size: 20px;
+  font-family: "Raleway", sans-serif;
+  font-weight: medium;
+}
+
+#team_video {
+  padding-right: 25px;
 }
 
 
@@ -303,7 +371,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar a:hover:before, .navbar li:hover > a:before, .navbar .active:before {
-  visibility: visible;
+  /* visibility: visible; */
   width: 100%;
 }
 
@@ -963,7 +1031,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #venue .venue-info {
-  background: url("../img/venue-info-bg.jpg") top center no-repeat;
+  background: url('../img/stadium/5.jpg') top center no-repeat;
   background-size: cover;
   position: relative;
   padding-top: 60px;
