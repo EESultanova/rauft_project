@@ -19,10 +19,10 @@ const checkAuth = require('../middlewares/checkAuth');
 router.get('/signup', (req, res) => {
   res.render('signup');
 })
-
 router.post('/signup', checkAdmin, async (req, res) => {
   try {
     const { name, email, password, age, education, login } = req.body;
+    console.log(req.body)
     const pass = await bcrypt.hash(password, saltRound);
     const user = new User({ name, email, password: pass, age, education, login });
     await user.save();

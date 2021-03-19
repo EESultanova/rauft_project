@@ -14,6 +14,10 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+#form{
+  margin-top: 50px;
+}
+
 html, body, #wrap {height: 100%;}
 
 body > #wrap {height: auto; min-height: 100%;}
