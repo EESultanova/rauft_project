@@ -1,13 +1,47 @@
-const { Router } = require('express')
-const User = require('../db/models/User')
-const adminRouter = Router()
+const User = require("../db/models/User");
+const { Router } = require("express");
+const { checkAdmin } = require("../middlewares/checkAdmin");
+const adminRouter = Router();
 
-adminRouter.get('/', async (req, res) => {
-  const candidates = await User.find({role : 2})
-  console.log(candidates);
-  res.render('admin', {candidates})
-})
+//Добавить checkAdmin
+adminRouter.get("/",  async (req, res) => {
+  let candidates = await User.aggregate([
+    { $match: { role: 2 } },
+    {
+      $project: {
+        date_of_birth: {
+          $dateToString: { format: "%d-%m-%Y", date: "$date_of_birth" },
+        },
+        name: 1,
+        education: 1,
+        industry: 1,
+        hobby: 1,
+      },
+    },
+  ]);
+  res.render("admin", { candidates });
+});
 
-adminRouter.patch()
+adminRouter.patch("/", async (req, res) => {
+  try {
+    const user = await User.findById(req.body.id);
+    user.role = 1;
+    await user.save();
+    return res.sendStatus(200);
+  } catch (error) {
+    return res.sendStatus(500);
+  }
+});
 
-module.exports = adminRouter
+adminRouter.delete("/", async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.body.id);
+    return res.sendStatus(200);
+  } catch (error) {
+    return res.sendStatus(500);
+  }
+});
+
+module.exports = adminRouter;
+
+//.toLocaleString('ru-RU', {year: 'numeric', month: "2-digit", day:"2-digit"})
