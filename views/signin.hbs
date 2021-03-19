@@ -1,4 +1,4 @@
-<form method="POST">
+<form method="POST" action = "/users/signin" id="form">
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input name="email" required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -11,3 +11,7 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+{{#if error}}
+<p>{{error}}</p>
+{{/if}}

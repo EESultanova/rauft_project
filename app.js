@@ -5,6 +5,7 @@ const path = require('path')
 const hbs = require('hbs')
 const sessions = require('express-session')
 const MongoStore = require('connect-mongo')
+const morgan = require('morgan')
 
 const userRouter = require('./routes/users')
 const pageRouter = require('./routes/pages')
@@ -14,7 +15,6 @@ const dbConnect = require('./config/dbConnect')
 const { dbConnectionURL } = require('./config/dbConfig')
 const User = require('./db/models/User')
 
-const pagesRouter = require('./routes/pages');
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -25,7 +25,7 @@ app.set('trust proxy', 1)
 app.set('view engine', 'hbs')
 app.set('cookieName', 'sid')
 app.set('views', path.join(process.env.PWD, 'views'))
-hbs.registerPartials(path.join(process.env.PWD,'views', 'partials'))
+hbs.registerPartials(path.join(process.env.PWD, 'views', 'partials'))
 
 
 app.use(sessions({
@@ -43,12 +43,14 @@ app.use(sessions({
   },
 }))
 
-//app.use(morgan('dev'))
+app.use(morgan('dev'))
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/', pagesRouter);
+app.use('/', pageRouter);
+app.use('/users/', userRouter);
+
 
 //Mid for routes here
 app.use('/admin', adminRouter)
