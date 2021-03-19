@@ -24,7 +24,7 @@ router.post('/signup', checkAdmin, async (req, res) => {
   try {
     const { name, email, password, age, education, login } = req.body;
     const pass = await bcrypt.hash(password, saltRound);
-    const user = new User({ name, email, password: pass, age, education, login, role: 0 });
+    const user = new User({ name, email, password: pass, age, education, login });
     await user.save();
     return res.redirect('/')
   } catch (error) {
