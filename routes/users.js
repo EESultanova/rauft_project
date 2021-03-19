@@ -1,6 +1,6 @@
 //Здесь вся логика регистрации и авторизации Андрей
 
-const { Router } = require('express');
+const router = require('express').Router();
 const User = require('../db/models/User');
 
 const bcrypt = require('bcrypt');
@@ -12,7 +12,7 @@ const checkAdmin = require('../middlewares/checkAdmin');
 const checkAuth = require('../middlewares/checkAuth');
 
 
-const router = Router()
+// const router = Router()
 
 //Ручка для регистрации
 
@@ -24,11 +24,11 @@ router.post('/signup', checkAdmin, async (req, res) => {
   try {
     const { name, email, password, age, education, login } = req.body;
     const pass = await bcrypt.hash(password, saltRound);
-    const user = new User ({ name, email, password: pass, age, education, login, role: 0 });
+    const user = new User({ name, email, password: pass, age, education, login, role: 0 });
     await user.save();
-    return res.redirect ('/')
+    return res.redirect('/')
   } catch (error) {
-    return res.render ('signup', {error});
+    return res.render('signup', { error });
   }
 })
 
@@ -46,12 +46,12 @@ router.post('/signin', checkAuth, async (req, res) => {
       req.session.roleSession = searchByEmail.role;
       req.session.emailSession = searchByEmail.email;
       req.session.idSession = searchByEmail._id;
-      return res.redirect ('/club')
+      return res.redirect('/club')
     } else {
-    return res.render ('signin', { error : "Sorry, you are not approved yet" });
-  }
+      return res.render('signin', { error: "Sorry, you are not approved yet" });
+    }
   } catch (error) {
-    return res.render ('signin', {error});
+    return res.render('signin', { error });
   }
 
 })
