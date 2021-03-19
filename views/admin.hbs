@@ -1,20 +1,20 @@
-<div>
-  
-  <ul>
-      {{#each candidates}}
-    <li>
-      {{this.login}}
-    </li>
-    {{/each}}
-  </ul>
+
+<div id='card-container' class="d-flex flex-wrap flex-row justify-content-center" style="margin-top: 100px;">
+
+{{#each candidates}}
+<div class="card " style="width: 18rem; margin: 20px">
+  <div class="card-body">
+    
+    <h5 class="card-title">{{this.name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">date of birth: {{this.date_of_birth}}</h6>
+    <h7 class="card-subtitle mb-2 text-muted">education: {{this.education}}</h7><br>
+    <h7 class="card-subtitle mb-2 text-muted">industry: {{this.industry}}</h7><br>
+    <h7 class="card-subtitle mb-2 text-muted">hobby: {{this.hobby}}</h7><br><br>
+
+    <a href="/admin" class="card-link" data-conid= "{{this._id}}">Confirm</a>
+    <a href="/admin" class="card-link" data-rejid= "{{this._id}}">Reject</a>
+  </div>
 </div>
-
-
-
-<form action="/admin" method="PATCH">
-  <label for="fname">name:</label>
-  <input type="text" id="fname" name="fname"><br><br>
-  <label for="lname">Last name:</label>
-  <input type="text" id="lname" name="lname"><br><br>
-  <input type="submit" value="Submit">
-</form>
+<br><br>
+{{/each}}
+</div>
