@@ -26,6 +26,26 @@ a {
   transition: 0.5s;
 }
 
+body {
+  /* background: linear-gradient(70deg, #363535, #f7f7f7); */
+  background-color: black;
+  /* color: #514B64; */
+  min-height: 100vh;
+}
+
+code {
+  background: #fff;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  margin: 0 0.3rem;
+}
+
+.nav_container {
+  /* display: flex; */
+  margin: auto;
+}
+
+
 a:hover, a:active, a:focus {
   color: #f8234a;
   outline: none;
