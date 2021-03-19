@@ -39,6 +39,4 @@ const checkAdmin = async (req, res, next) => {
   return res.redirect('/')
 }
 
-module.exports = {
-  checkAdmin,
-}
+module.exports = checkAdmin
