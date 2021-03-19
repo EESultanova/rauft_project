@@ -9,7 +9,7 @@ const checkAuth = async (req, res, next) => {
     if(searchByEmail === false) {
       return res.render('signin', { error: 'Your email is not correct'})
     } else {
-      if (searchByEmail.password !== password) {
+      if (!(await bcrypt.compare(password, searchByEmail?.password))) {
       return res.render('signin', { error: 'Your password is not correct'})
       } else {
          return next()

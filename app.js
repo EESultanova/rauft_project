@@ -28,20 +28,20 @@ app.set('views', path.join(process.env.PWD, 'views'))
 hbs.registerPartials(path.join(process.env.PWD, 'views', 'partials'))
 
 
-app.use(sessions({
-  name: app.get('cookieName'),
-  secret: secretKey,
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: dbConnectionURL,
-  }),
-  cookie: {
-    secure: true,
-    httpOnly: true,
-    maxAge: 86400 * 1e3,
-  },
-}))
+// app.use(sessions({
+//   name: app.get('cookieName'),
+//   secret: secretKey,
+//   resave: false,
+//   saveUninitialized: false,
+//   store: MongoStore.create({
+//     mongoUrl: dbConnectionURL,
+//   }),
+//   cookie: {
+//     secure: true,
+//     httpOnly: true,
+//     maxAge: 86400 * 1e3,
+//   },
+// }))
 
 app.use(morgan('dev'))
 app.use(express.json());
