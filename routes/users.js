@@ -19,7 +19,6 @@ const checkAuth = require('../middlewares/checkAuth');
 router.get('/signup', (req, res) => {
   res.render('signup');
 })
-
 router.post('/signup', checkAdmin, async (req, res) => {
   try {
     const { name, email, password, age, education, login } = req.body;

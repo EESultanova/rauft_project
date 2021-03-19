@@ -1,6 +1,8 @@
 // Делает Андрей
 
-const User = require('../db/models/User')
+const User = require('../db/models/User');
+
+const bcrypt = require('bcrypt');
 
 
 const checkAuth = async (req, res, next) => {
