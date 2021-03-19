@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
     min: 5,
     unique: true,
   },
-  pass: {
+  password: {
     type: String,
     required: true,
     min: 6,
@@ -32,8 +32,10 @@ const userSchema = mongoose.Schema({
   date_of_birth: {
     type: Date,
   },
+  // Поле required нужно потому что при регистрации это обязательное поле
   education: {
-    type: String
+    type: String,
+    required: true,
   },
   industry: {
     type: String
@@ -61,6 +63,11 @@ const userSchema = mongoose.Schema({
   },
   favorite_place: {
     type: String
+  },
+  //Поле ниже нужно для первичной регистрации потенциального члена Клуба
+  age: {
+    type: Number,
+    required: true,
   }
 })
 
