@@ -21,7 +21,6 @@ router.get('/signup', (req, res) => {
 router.post('/signup', checkAdmin, async (req, res) => {
   try {
     const { name, email, password, age, education, login } = req.body;
-    console.log(req.body)
     const pass = await bcrypt.hash(password, saltRound);
     const user = new User({ name, email, password: pass, age, education, login }); 
     await user.save();
@@ -64,4 +63,12 @@ router.post("/signin", checkAuth, async (req, res) => {
   }
 });
 
-module.exports = router;
+
+router.get('/logout', checkAuth, async (req, res) => {
+  req.session.destroy();
+  res.redirect('/')
+})
+
+
+module.exports = router
+
