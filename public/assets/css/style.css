@@ -45,6 +45,11 @@ code {
   margin: auto;
 }
 
+#form_registration {
+  width: 800px;
+  margin: auto;
+}
+
 
 a:hover, a:active, a:focus {
   color: #f8234a;
