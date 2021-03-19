@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 
 
 const checkAuth = async (req, res, next) => {
+  console.log('AUTH?????')
   const { email, password } = req.body;
   const searchByEmail = await User.findOne({ email })
     if(searchByEmail === false) {

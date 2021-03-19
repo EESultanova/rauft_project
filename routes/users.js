@@ -22,7 +22,6 @@ router.get('/signup', (req, res) => {
 router.post('/signup', checkAdmin, async (req, res) => {
   try {
     const { name, email, password, age, education, login } = req.body;
-    console.log(req.body)
     const pass = await bcrypt.hash(password, saltRound);
     const user = new User({ name, email, password: pass, age, education, login }); 
     await user.save();
@@ -40,21 +39,32 @@ router.get('/signin', (req, res) => {
 
 router.post('/signin', checkAuth, async (req, res) => {
   try {
+    console.log('ALYO???????')
     const { email } = req.body;
     const searchByEmail = await User.findOne({ email })
     if (searchByEmail.role === 0 || searchByEmail.role === 1) {
+      // console.log(searchByEmail);
       req.session.roleSession = searchByEmail.role;
       req.session.emailSession = searchByEmail.email;
       req.session.idSession = searchByEmail._id;
+      console.log('Session ===>', req.session)
+      console.log('Locals ===>', res.locals)
+
       return res.redirect('/club')
     } else {
       return res.render('signin', { error: "Sorry, you are not approved yet" });
     }
   } catch (error) {
+    console.log('ALYO???????')
     return res.render('signin', { error });
   }
+});
 
+router.get('/logout', checkAuth, async (req, res) => {
+  req.session.destroy();
+  res.redirect('/')
 })
+
 
 module.exports = router
 
