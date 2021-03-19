@@ -33,6 +33,22 @@ body {
   min-height: 100vh;
 }
 
+#form_registration {
+  width: 800px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+#login_form {
+  width: 800px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.form-group{
+  margin-bottom: 20px;
+}
+
 code {
   background: #fff;
   padding: 0.2rem;
