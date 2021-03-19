@@ -55,6 +55,21 @@ app.use('/users/', userRouter);
 //Mid for routes here
 app.use('/admin', adminRouter)
 
+app.use(async (req, res, next) => {
+  const userId = req.session?.user?.id
+  if (userId) {
+    const currentUser = await User.findById(userId)
+    req.userRole = currentUser.role
+    if (req.userRole === 0) {
+      res.locals.email = currentUser.email
+      return next()
+    }
+  }
+  next()
+})
+
 app.listen(PORT, () => {
   console.log('Server started on port ', PORT)
 })
+
+module.exports = app;

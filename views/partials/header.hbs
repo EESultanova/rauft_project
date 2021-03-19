@@ -1,4 +1,4 @@
-<header id="header" class="d-flex align-items-center ">
+{{!-- <header id="header" class="d-flex align-items-center ">
   <div class="container-fluid container-xxl d-flex align-items-center">
 
     <div id="logo" class="me-auto">
@@ -17,12 +17,44 @@
         <li><a class="nav-link scrollto" href="/schedule">SCHEDULE</a></li>
         <li><a class="nav-link scrollto" href="/events">EVENTS</a></li>
         <li><a class="nav-link scrollto" href="/gallery">GALLERY</a></li>
-        <li><a class="nav-link scrollto" href="/tojoin">TO JOIN</a></li>
         <li><a class="nav-link scrollto" href="/login">LOGIN</a></li>
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->
-    <a class="buy-tickets scrollto" href="/registration">Registartion</a>
+    <a class="buy-tickets scrollto" href="/registration">REGISTRATION</a>
 
   </div>
-</header><!-- End Header -->
+</header><!-- End Header --> --}}
+
+
+<nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
+  <div class="nav_container">
+    <a href="/" class="navbar-brand">
+      <!-- Logo Image -->
+      <img src="assets/img/logo.png" width="150" alt="" class="d-inline-block align-middle mr-2">
+      <!-- Logo Text -->
+      <img src="assets/img/slogan.png" width="150" alt="" class="d-inline-block align-middle mr-2">
+      {{!-- <span class="text-uppercase font-weight-bold">Company</span> --}}
+    </a>
+
+    <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+      class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+
+    <div id="navbarSupportedContent" class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active"><a href="/club" class="nav-link">CLUB</span></a>
+        </li>
+        <li class="nav-item"><a href="/training" class="nav-link">TRAINING</a></li>
+        <li class="nav-item"><a href="/team" class="nav-link">TEAM</a></li>
+        <li class="nav-item"><a href="/stadium" class="nav-link">STADIUM</a></li>
+        <li class="nav-item"><a href="/schedule" class="nav-link">SCHEDULE</a></li>
+        <li class="nav-item"><a href="/events" class="nav-link">EVENTS</a></li>
+        <li class="nav-item"><a href="/gallery" class="nav-link">GALLERY</a></li>
+        <li class="nav-item"><a href="/login" class="nav-link">LOGIN</a></li>
+        <li class="nav-item"><a href="/admin" class="nav-link">ADMIN</a></li>
+        <li class="nav-item"><a href="/registration" class="nav-link">REGISTRATION</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
