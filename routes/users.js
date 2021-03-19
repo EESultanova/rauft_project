@@ -1,60 +1,71 @@
 //Здесь вся логика регистрации и авторизации Андрей
 
-const router = require('express').Router();
-const User = require('../db/models/User');
+const router = require("express").Router();
+const User = require("../db/models/User");
 
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 const saltRound = 10;
 
-const checkAdmin = require('../middlewares/checkAdmin');
+const checkAdmin = require("../middlewares/checkAdmin");
 
-const checkAuth = require('../middlewares/checkAuth');
-
+const checkAuth = require("../middlewares/checkAuth");
 
 // const router = Router()
 
 //Ручка для регистрации
 
-router.get('/signup', (req, res) => {
-  res.render('signup');
-})
+router.get("/signup", (req, res) => {
+  res.render("signup");
+});
 
-router.post('/signup', checkAdmin, async (req, res) => {
+router.post("/signup", checkAdmin, async (req, res) => {
   try {
     const { name, email, password, age, education, login } = req.body;
     const pass = await bcrypt.hash(password, saltRound);
-    const user = new User({ name, email, password: pass, age, education, login, role: 0 });
+    const user = new User({
+      name,
+      email,
+      password: pass,
+      age,
+      education,
+      login,
+      role: 0,
+    });
     await user.save();
-    return res.redirect('/')
+    return res.redirect("/");
   } catch (error) {
-    return res.render('signup', { error });
+    return res.render("signup", { error });
   }
-})
+});
 
 //Ручка для авторизации
 
-router.get('/signin', (req, res) => {
-  res.render('signin');
-})
+router.get("/signin", (req, res) => {
+  res.render("signin");
+});
 
-router.post('/signin', checkAuth, async (req, res) => {
+router.post("/signin", checkAuth, async (req, res) => {
   try {
-    const { email } = req.body;
-    const searchByEmail = await User.findOne({ email })
-    if (searchByEmail.role === 0 || searchByEmail.role === 1) {
-      req.session.roleSession = searchByEmail.role;
-      req.session.emailSession = searchByEmail.email;
-      req.session.idSession = searchByEmail._id;
-      return res.redirect('/club')
+    const { email, password } = req.body;
+    if (email && password) {
+      const searchByEmail = await User.findOne({ email });
+      if (
+        searchByEmail &&
+        (await bcrypt.compare(password, searchByEmail.password)) &&
+        (searchByEmail.role === 0 || searchByEmail.role === 1)
+      ) {
+        req.session.roleSession = searchByEmail.role;
+        req.session.emailSession = searchByEmail.email;
+        req.session.idSession = searchByEmail._id;
+        return res.redirect("/club");
+      }
     } else {
-      return res.render('signin', { error: "Sorry, you are not approved yet" });
+      return res.render("signin", { error: "Sorry, you are not approved yet" });
     }
   } catch (error) {
-    return res.render('signin', { error });
+    return res.render("signin", { error });
   }
+});
 
-})
-
-module.exports = router
-
+module.exports = router;

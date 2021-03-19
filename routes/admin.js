@@ -1,10 +1,10 @@
 const User = require("../db/models/User");
 const { Router } = require("express");
-const { checkAdmin } = require("../middlewares/checkAdmin");
+const checkIsAdmin = require("../middlewares/checkIsAdmin");
 const adminRouter = Router();
 
 //Добавить checkAdmin
-adminRouter.get("/",  async (req, res) => {
+adminRouter.get("/", checkIsAdmin, async (req, res) => {
   let candidates = await User.aggregate([
     { $match: { role: 2 } },
     {
